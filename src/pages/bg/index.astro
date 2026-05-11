@@ -1,0 +1,209 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Начало">
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-content">
+            <h1 id="hero-title">
+                Дигитално включване чрез киберсигурност и етичен ИИ
+            </h1>
+            <p class="subtitle">
+                Овластяване на професионалното образование и обучение в цяла
+                Европа с достъпни, авангардни дигитални умения.
+            </p>
+            <div class="hero-actions">
+                <a href="/bg/e-learning" class="btn btn-primary"
+                    >Към платформата за електронно обучение</a
+                >
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-project" aria-labelledby="about-title">
+        <h2 id="about-title">Относно проекта DICE</h2>
+        <div class="content-grid">
+            <div class="card">
+                <h3>Цели на проекта</h3>
+                <p>
+                    Проектът DICE преодолява дигиталното разделение чрез
+                    изграждане на достъпна платформа за електронно обучение,
+                    финансирана от Еразъм+. Разработена съвместно от партньори в
+                    Германия, Италия и България, тя предоставя специализирано
+                    обучение по практическа киберсигурност и приложен етичен ИИ.
+                </p>
+            </div>
+            <div class="card">
+                <h3>C-VET обучаеми</h3>
+                <p>
+                    Обучаемите в сферата на продължаващото професионално
+                    образование и обучение (C-VET) получават директен, безплатен
+                    достъп до нашата приобщаваща платформа за електронно
+                    обучение. Те придобиват конкретни умения в защитата на
+                    данни, сигурни дигитални практики и етичен ИИ, за да останат
+                    конкурентоспособни на европейския пазар на труда.
+                </p>
+            </div>
+            <div class="card">
+                <h3>VET доставчици</h3>
+                <p>
+                    Доставчиците на професионално образование и обучение (VET)
+                    получават готови за използване, високо достъпни модули за
+                    обучение. Чрез интегриране на нашата специализирана учебна
+                    програма в своите програми, преподавателите могат ефективно
+                    да обучават възрастни в цяла Европа по концепциите за
+                    киберсигурност и ИИ.
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .hero {
+        background-color: var(--bg-color-alt);
+        padding: 5rem 2rem;
+        border-radius: 12px;
+        text-align: center;
+        margin-bottom: 4rem;
+        box-shadow:
+            0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border: 1px solid var(--border-color);
+    }
+
+    .hero-content {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .hero-content h1 {
+        font-size: 2.75rem;
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.025em;
+    }
+
+    .subtitle {
+        font-size: 1.25rem;
+        color: var(--text-color-light);
+        max-width: 700px;
+        margin: 0 auto 2.5rem auto;
+        line-height: 1.7;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.875rem 1.75rem;
+        border-radius: 8px;
+        font-size: 1.125rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+        background-color: var(--accent-color);
+        color: #ffffff;
+        border: 2px solid var(--accent-color);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+        background-color: var(--accent-hover);
+        border-color: var(--accent-hover);
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--accent-color);
+        border: 2px solid var(--accent-color);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+        background-color: var(--accent-color);
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .about-project {
+        margin-bottom: 4rem;
+    }
+
+    .about-project h2 {
+        font-size: 2.25rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--text-color);
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    .card {
+        background-color: var(--bg-color-alt);
+        padding: 2.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+        color: var(--accent-color);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .card p {
+        color: var(--text-color-light);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .hero {
+            padding: 3rem 1.5rem;
+        }
+
+        .hero-content h1 {
+            font-size: 2.25rem;
+        }
+
+        .hero-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .card {
+            padding: 2rem;
+        }
+    }
+</style>

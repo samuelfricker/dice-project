@@ -1,0 +1,416 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Modal from "../components/Modal.astro";
+---
+
+<Layout
+    title="E-Learning Platform"
+    description="Access the DICE E-learning platform. Courses on Cybersecurity, Ethical AI, and Digital Inclusion."
+>
+    <div class="gateway-container">
+        <section class="hero-section" aria-labelledby="elearning-title">
+            <h1 id="elearning-title">DICE E-Learning Platform</h1>
+            <p class="lead-text">
+                Your gateway to accessible, cutting-edge vocational training in
+                Cybersecurity and Ethical Artificial Intelligence.
+            </p>
+            <div class="cta-container">
+                <button
+                    id="access-platform-btn"
+                    class="btn btn-primary btn-large lms-trigger"
+                    data-course="general"
+                >
+                    Access the Platform
+                </button>
+            </div>
+        </section>
+
+        <section class="course-catalogue" aria-labelledby="catalogue-title">
+            <h2 id="catalogue-title">Course Catalogue</h2>
+
+            <div class="grid">
+                <!-- Module 1 -->
+                <article class="course-card">
+                    <div class="course-icon" aria-hidden="true">🌐</div>
+                    <h3>Module 1: Digital Inclusion</h3>
+                    <p>
+                        Understand what digital inclusion is and why it matters
+                        today. This module addresses barriers such as access,
+                        skills, and motivation, and explores strategies for
+                        advancement in C-VET contexts.
+                    </p>
+                    <button
+                        class="course-link lms-trigger"
+                        data-course="digital-inclusion"
+                    >
+                        View Course <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </article>
+
+                <!-- Module 2 -->
+                <article class="course-card">
+                    <div class="course-icon" aria-hidden="true">🔒</div>
+                    <h3>Module 2: Introduction to Cybersecurity</h3>
+                    <p>
+                        Learn the importance of cybersecurity in personal and
+                        professional lives. Recognize common threats like
+                        malware and phishing, and understand the basics of
+                        protective measures.
+                    </p>
+                    <button
+                        class="course-link lms-trigger"
+                        data-course="cybersecurity-intro"
+                    >
+                        View Course <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </article>
+
+                <!-- Module 3 -->
+                <article class="course-card">
+                    <div class="course-icon" aria-hidden="true">🛡️</div>
+                    <h3>Module 3: Advanced Cybersecurity</h3>
+                    <p>
+                        Dive into advanced topics like encryption, firewalls,
+                        and network security. Understand the specific impact of
+                        cybersecurity across various vocational industries.
+                    </p>
+                    <button
+                        class="course-link lms-trigger"
+                        data-course="cybersecurity-advanced"
+                    >
+                        View Course <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </article>
+
+                <!-- Module 4 -->
+                <article class="course-card">
+                    <div class="course-icon" aria-hidden="true">🤖</div>
+                    <h3>Module 4: Intro to Artificial Intelligence</h3>
+                    <p>
+                        Explore the fundamentals of AI and its real-world
+                        applications in vocational settings, including
+                        automation and predictive analytics through inspiring
+                        case studies.
+                    </p>
+                    <button
+                        class="course-link lms-trigger"
+                        data-course="ai-intro"
+                    >
+                        View Course <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </article>
+
+                <!-- Module 5 -->
+                <article class="course-card">
+                    <div class="course-icon" aria-hidden="true">⚙️</div>
+                    <h3>Module 5: Applied AI</h3>
+                    <p>
+                        Learn how to implement ethical AI practices into
+                        vocational and educational spaces. Discover tools and
+                        approaches that empower professionals as champions for
+                        ethical AI.
+                    </p>
+                    <button
+                        class="course-link lms-trigger"
+                        data-course="applied-ai"
+                    >
+                        View Course <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </article>
+
+                <!-- Module 6 -->
+                <article class="course-card">
+                    <div class="course-icon" aria-hidden="true">⚖️</div>
+                    <h3>Module 6: Ethical Principles in AI</h3>
+                    <p>
+                        Examine the ethical implications of AI, including bias,
+                        transparency, and accountability. Explore frameworks
+                        like the EU's Ethics Guidelines for Trustworthy AI.
+                    </p>
+                    <button
+                        class="course-link lms-trigger"
+                        data-course="ethical-ai"
+                    >
+                        View Course <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </article>
+
+                <!-- Module 7 -->
+                <article class="course-card">
+                    <div class="course-icon" aria-hidden="true">📚</div>
+                    <h3>Module 7: Digital Skills for Lifelong Learning</h3>
+                    <p>
+                        Master the concept of lifelong learning in the digital
+                        world. Create a plan to keep your skills current and
+                        understand the role of digital literacy in career
+                        growth.
+                    </p>
+                    <button
+                        class="course-link lms-trigger"
+                        data-course="lifelong-learning"
+                    >
+                        View Course <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </article>
+            </div>
+        </section>
+
+        <section class="platform-features" aria-labelledby="features-title">
+            <h2 id="features-title">Platform Features</h2>
+            <ul class="feature-list">
+                <li>
+                    <strong>WCAG 2.1 AA Compliant:</strong> Fully accessible interface
+                    supporting screen readers, high contrast, and keyboard navigation.
+                </li>
+                <li>
+                    <strong>Multilingual Support:</strong> Courses available in English,
+                    German, Italian, and Bulgarian.
+                </li>
+                <li>
+                    <strong>Self-Paced Learning:</strong> Progress through modules
+                    at your own speed with interactive assessments.
+                </li>
+                <li>
+                    <strong>Certification:</strong> Earn a certificate of completion
+                    co-funded by the Erasmus+ Programme.
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <Modal id="release-pending-modal" title="Coming Soon">
+        <p>
+            The DICE E-Learning platform is currently in the final stages of
+            development.
+        </p>
+        <p>
+            We are working hard to bring you high-quality courses on
+            Cybersecurity, Ethical AI, and Digital Inclusion. Please check back
+            soon for the official launch!
+        </p>
+    </Modal>
+</Layout>
+
+<script>
+    const triggers = document.querySelectorAll(".lms-trigger");
+    const modal = document.getElementById(
+        "release-pending-modal",
+    ) as HTMLDialogElement;
+
+    triggers.forEach((trigger) => {
+        trigger.addEventListener("click", async (e) => {
+            const target = e.currentTarget as HTMLElement;
+            const course = target.dataset.course || "unknown";
+
+            // Open modal
+            if (modal) {
+                modal.showModal();
+            }
+
+            // Log click to server
+            try {
+                await fetch("/api/log-click", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        platform: "e-learning",
+                        course: course,
+                        locale: "en",
+                        timestamp: new Date().toISOString(),
+                    }),
+                });
+            } catch (err) {
+                console.error("Failed to log click", err);
+            }
+        });
+    });
+</script>
+
+<style>
+    .gateway-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    .hero-section {
+        text-align: center;
+        background-color: var(--bg-color-alt);
+        padding: 4rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-color);
+        margin-bottom: 4rem;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+    }
+
+    .lead-text {
+        font-size: 1.25rem;
+        color: var(--text-color-light);
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        line-height: 1.6;
+    }
+
+    .cta-container {
+        margin-top: 2rem;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.875rem 1.75rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .btn-primary {
+        background-color: var(--accent-color);
+        color: #ffffff;
+        border: 2px solid var(--accent-color);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+        background-color: var(--accent-hover);
+        border-color: var(--accent-hover);
+        color: #ffffff;
+    }
+
+    .btn-large {
+        font-size: 1.25rem;
+        padding: 1rem 2rem;
+    }
+
+    .course-catalogue {
+        margin-bottom: 4rem;
+    }
+
+    .course-catalogue h2,
+    .platform-features h2 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2.5rem;
+        color: var(--text-color);
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    .course-card {
+        background-color: var(--bg-color-alt);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        transition:
+            transform 0.2s,
+            box-shadow 0.2s;
+    }
+
+    .course-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .course-card h3 {
+        font-size: 1.25rem;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+    }
+
+    .course-card p {
+        color: var(--text-color-light);
+        flex-grow: 1;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .course-link {
+        display: inline-block;
+        margin-top: 1.5rem;
+        font-weight: 600;
+        color: var(--accent-color);
+        background: none;
+        border: none;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+        cursor: pointer;
+        text-align: left;
+    }
+
+    .course-link:hover {
+        color: var(--accent-hover);
+    }
+
+    .platform-features {
+        background-color: var(--bg-color-alt);
+        padding: 3rem 2rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .feature-list li {
+        padding-left: 2rem;
+        position: relative;
+        color: var(--text-color-light);
+    }
+
+    .feature-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--accent-color);
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    .feature-list strong {
+        color: var(--text-color);
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 3rem 1.5rem;
+        }
+
+        .hero-section h1 {
+            font-size: 2rem;
+        }
+    }
+</style>

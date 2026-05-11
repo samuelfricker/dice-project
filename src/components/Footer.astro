@@ -1,0 +1,417 @@
+---
+// src/components/Footer.astro
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentYear = new Date().getFullYear();
+const locale = (Astro.currentLocale || "en") as "en" | "de" | "it" | "bg";
+
+const translations = {
+    en: {
+        contact: "Contact",
+        funding: "Funding",
+        social: "Social Media",
+        privacy: "Privacy Policy & Imprint",
+        terms: "Terms of Service",
+        rights: "All rights reserved.",
+        disclaimer:
+            "Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them. Project Code: 2025-1-DE02-KA210-VET-000358948.",
+        logoAlt: "DICE Project Logo",
+        euAlt: "Co-funded by the European Union",
+        emailAria: "Email DICE Project",
+    },
+    de: {
+        contact: "Kontakt",
+        funding: "Förderung",
+        social: "Social Media",
+        privacy: "Datenschutzerklärung & Impressum",
+        terms: "Nutzungsbedingungen",
+        rights: "Alle Rechte vorbehalten.",
+        disclaimer:
+            "Von der Europäischen Union finanziert. Die geäußerten Ansichten und Meinungen entsprechen jedoch ausschließlich denen des Autors bzw. der Autoren und spiegeln nicht zwingend die der Europäischen Union oder der Europäischen Exekutivagentur für Bildung und Kultur (EACEA) wider. Weder die Europäische Union noch die EACEA können dafür verantwortlich gemacht werden. Projektcode: 2025-1-DE02-KA210-VET-000358948.",
+        logoAlt: "DICE Projekt Logo",
+        euAlt: "Von der Europäischen Union kofinanziert",
+        emailAria: "E-Mail an das DICE-Projekt",
+    },
+    it: {
+        contact: "Contatti",
+        funding: "Finanziamento",
+        social: "Social Media",
+        privacy: "Privacy Policy & Note Legali",
+        terms: "Termini di Servizio",
+        rights: "Tutti i diritti riservati.",
+        disclaimer:
+            "Finanziato dall'Unione Europea. Le opinioni espresse appartengono tuttavia al solo o ai soli autori e non riflettono necessariamente le opinioni dell'Unione Europea o dell'Agenzia esecutiva europea per l'istruzione e la cultura (EACEA). Né l'Unione Europea né l'EACEA possono esserne ritenute responsabili. Codice Progetto: 2025-1-DE02-KA210-VET-000358948.",
+        logoAlt: "DICE Progetto Logo",
+        euAlt: "Cofinanziato dall'Unione Europea",
+        emailAria: "Invia una email al progetto DICE",
+    },
+    bg: {
+        contact: "Контакт",
+        funding: "Финансиране",
+        social: "Социални медии",
+        privacy: "Политика за поверителност и импринт",
+        terms: "Условия за ползване",
+        rights: "Всички права запазени.",
+        disclaimer:
+            "Финансирано от Европейския съюз. Изразените възгледи и мнения обаче принадлежат единствено на техния автор(и) и не отразяват непременно тези на Европейския съюз или на Европейската изпълнителна агенция за образование и култура (EACEA). Нито Европейският съюз, нито EACEA могат да носят отговорност за тях. Код на проекта: 2025-1-DE02-KA210-VET-000358948.",
+        logoAlt: "DICE Лого на проекта",
+        euAlt: "Съфинансирано от Европейския съюз",
+        emailAria: "Изпратете имейл до проекта DICE",
+    },
+};
+
+const t = translations[locale] || translations.en;
+---
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Column 1: Contact -->
+        <div class="footer-col">
+            <h3>{t.contact}</h3>
+            <div class="brand-wrapper">
+                <img
+                    src="/DICE-2-logo.svg"
+                    alt={t.logoAlt}
+                    class="brand-logo"
+                    width="200"
+                    height="auto"
+                    loading="lazy"
+                />
+            </div>
+            <a
+                href="mailto:contact@dice-project.org"
+                class="contact-link"
+                aria-label={t.emailAria}
+            >
+                contact@dice-project.org
+            </a>
+        </div>
+
+        <!-- Column 2: Funding -->
+        <div class="footer-col">
+            <h3>{t.funding}</h3>
+            <div class="funding-emblem">
+                <img
+                    src="/eu-flag.svg"
+                    alt={t.euAlt}
+                    class="eu-logo"
+                    width="250"
+                    height="auto"
+                    loading="lazy"
+                />
+            </div>
+            <p class="eu-disclaimer">
+                {t.disclaimer}
+            </p>
+        </div>
+
+        <!-- Column 3: Social Media -->
+        <div class="footer-col">
+            <h3>{t.social}</h3>
+            <div class="social-icons">
+                <a
+                    href="https://www.linkedin.com/showcase/dice-project-erasmusplus"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                        ></path>
+                    </svg>
+                </a>
+                <a
+                    href="https://bsky.app/profile/dice-project.bsky.social"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Bluesky"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566 1.059 0 2.226 0 5.388c0 2.252 1.5 5.51 2.25 6.41.748.898 3.5 1.8 5.75 1.7-2.25.1-4.75.9-4.75 3.3 0 2.252 2.25 3.15 4.5 2.7C10.5 18.8 11.25 15.2 12 14c.75 1.2 1.5 4.8 4.25 5.5 2.25.45 4.5-.448 4.5-2.7 0-2.4-2.5-3.2-4.75-3.3 2.25.1 5-.802 5.75-1.7.75-.9 2.25-4.158 2.25-6.41 0-3.162-2.566-4.329-5.202-2.805C16.046 4.747 13.087 8.686 12 10.8z"
+                        ></path>
+                    </svg>
+                </a>
+                <a
+                    href="https://x.com/DProject79547"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X (formerly Twitter)"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                        ></path>
+                    </svg>
+                </a>
+                <a
+                    href="https://www.instagram.com/dice_project_erasmus/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                        ></path>
+                    </svg>
+                </a>
+                <a
+                    href="https://www.facebook.com/profile.php?id=61580709594379"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+                        ></path>
+                    </svg>
+                </a>
+                <a
+                    href="https://www.youtube.com/@DICEProject-p2o"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="YouTube"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                        ></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-footer (Boring Stuff) -->
+    <div class="sub-footer">
+        <div class="sub-footer-container">
+            <p>&copy; {currentYear} DICE Project. {t.rights}</p>
+            <div class="legal-links">
+                <a href={getRelativeLocaleUrl(locale, "/privacy")}
+                    >{t.privacy}</a
+                >
+                <a href={getRelativeLocaleUrl(locale, "/terms")}>{t.terms}</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    /* Base Footer Styling */
+    .site-footer {
+        background-color: rgba(26, 26, 26, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        color: #e0e0e0;
+        font-family: system-ui, sans-serif;
+        font-size: 15px; /* Between 14px-16px as required */
+        line-height: 1.6;
+        margin-top: auto; /* Push to bottom of page */
+    }
+
+    /* Grid Layout with Generous Whitespace */
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4rem;
+        padding: 5rem 2rem; /* Generous padding */
+    }
+
+    .footer-col h3 {
+        color: #ffffff;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    /* Contact Column Elements */
+    .brand-wrapper {
+        margin-bottom: 1.5rem;
+    }
+
+    .brand-logo {
+        max-width: 180px;
+        height: auto;
+        display: block;
+        /* Optional: Convert colorful logo to monochrome light gray for dark footer contrast */
+        filter: grayscale(100%) brightness(200%);
+        transition: filter 0.3s ease;
+    }
+
+    .brand-logo:hover {
+        filter: grayscale(0%) brightness(100%);
+    }
+
+    .contact-link {
+        color: #e0e0e0;
+        text-decoration: none;
+        font-size: 1rem;
+        display: inline-block;
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .contact-link:hover,
+    .contact-link:focus {
+        color: #ffffff;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        transform: translateX(4px);
+    }
+
+    /* Funding Column Elements */
+    .funding-emblem {
+        margin-bottom: 1.25rem;
+    }
+
+    .eu-logo {
+        max-width: 220px;
+        height: auto;
+        display: block;
+        border-radius: 4px;
+    }
+
+    .eu-disclaimer {
+        font-size: 0.875rem; /* 14px */
+        color: #a0a0a0;
+        margin: 0;
+    }
+
+    /* Social Media Elements */
+    .social-icons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25rem;
+    }
+
+    .social-icons a {
+        color: #a0a0a0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .social-icons a:hover,
+    .social-icons a:focus {
+        color: #ffffff;
+        transform: translateY(-3px); /* Subtle shift up */
+    }
+
+    .social-icons a:focus-visible {
+        outline: 2px solid #ffffff;
+        outline-offset: 4px;
+        border-radius: 2px;
+    }
+
+    /* Sub-footer Layout */
+    .sub-footer {
+        border-top: 1px solid #333333;
+        padding: 1.5rem 2rem;
+    }
+
+    .sub-footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sub-footer p {
+        margin: 0;
+        color: #888888;
+        font-size: 0.875rem;
+    }
+
+    .legal-links {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .legal-links a {
+        color: #888888;
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 0.2s ease;
+    }
+
+    .legal-links a:hover,
+    .legal-links a:focus {
+        color: #ffffff;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 860px) {
+        .footer-container {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            padding: 3rem 1.5rem;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 1rem;
+        }
+
+        .sub-footer-container {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+    }
+</style>

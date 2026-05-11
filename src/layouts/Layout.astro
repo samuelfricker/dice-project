@@ -1,0 +1,200 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const {
+    title,
+    description = "Digital Inclusion through Cybersecurity and Ethical AI (DICE) Project. Co-funded by the European Union.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={Astro.currentLocale}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="description" content={description} />
+        <title>{title} | DICE Project</title>
+    </head>
+    <body>
+        <div class="video-background" aria-hidden="true">
+            <video autoplay muted loop playsinline>
+                <source src="/videos/student-study.mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+
+        <Header />
+
+        <main id="main-content" tabindex="-1">
+            <slot />
+        </main>
+
+        <Footer />
+    </body>
+</html>
+
+<style is:global>
+    /* Global CSS Variables for WCAG 2.1 AA Compliance & Theming */
+    :root {
+        --bg-color: rgba(
+            248,
+            249,
+            250,
+            0.85
+        ); /* Semi-transparent for video visibility */
+        --bg-color-alt: rgba(
+            255,
+            255,
+            255,
+            0.9
+        ); /* Semi-transparent for video visibility */
+        --text-color: #1a202c; /* Dark slate for high contrast text */
+        --text-color-light: #4a5568; /* Slightly lighter text for secondary info */
+        --accent-color: #2563eb; /* Royal blue for trust, highly accessible */
+        --accent-hover: #1d4ed8; /* Darker blue for hover states */
+        --border-color: #e2e8f0; /* Light gray for subtle dividers */
+    }
+
+    /* Reset & Box Sizing */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        font-family:
+            "Inter",
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            "Helvetica Neue",
+            Arial,
+            sans-serif;
+        background-color: #000;
+        color: var(--text-color);
+        line-height: 1.6;
+        scroll-behavior: smooth;
+        font-size: 16px; /* Base for rem calculations */
+    }
+
+    body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: transparent;
+    }
+
+    .video-background {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -2;
+        overflow: hidden;
+    }
+
+    .video-background video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+    }
+
+    .video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.6);
+        z-index: -1;
+    }
+
+    /* Main content wrapper */
+    main {
+        flex: 1;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    main:focus {
+        outline: none; /* Remove focus ring when skipping to main content via link */
+    }
+
+    /* Typography Defaults */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 1.2;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+        font-weight: 700;
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Global Link Styles */
+    a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    a:hover {
+        color: var(--accent-hover);
+        text-decoration: underline;
+    }
+
+    a:focus-visible {
+        outline: 2px solid var(--accent-color);
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+
+    /* Images */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Accessibility Utility Classes */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+</style>

@@ -1,0 +1,223 @@
+---
+import { getCollection, render } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+    const newsEntries = await getCollection("news");
+
+    // Only English entries for this non-prefixed route
+    return newsEntries
+        .filter((entry) => entry.id.startsWith("en/"))
+        .map((entry) => {
+            const [, ...slugParts] = entry.id.split("/");
+            return {
+                params: { slug: slugParts.join("/") },
+                props: { entry },
+            };
+        });
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const locale = "en";
+
+const formattedDate = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+}).format(entry.data.date);
+---
+
+<Layout title={entry.data.title} description={entry.data.description}>
+    <div class="article-wrapper">
+        <a
+            href={getRelativeLocaleUrl(locale, "/news")}
+            class="back-link"
+            aria-label="Back to News Overview"
+        >
+            <span aria-hidden="true">&larr;</span> Back to News
+        </a>
+
+        <article class="news-article">
+            <header class="article-header">
+                <h1 class="article-title">{entry.data.title}</h1>
+
+                <div class="article-meta">
+                    <time datetime={entry.data.date.toISOString()} class="date">
+                        {formattedDate}
+                    </time>
+
+                    {
+                        entry.data.tags && entry.data.tags.length > 0 && (
+                            <ul class="tags-list" aria-label="Tags">
+                                {entry.data.tags.map((tag: string) => (
+                                    <li class="tag">{tag}</li>
+                                ))}
+                            </ul>
+                        )
+                    }
+                </div>
+            </header>
+
+            <div class="article-content">
+                <Content />
+            </div>
+        </article>
+    </div>
+</Layout>
+
+<style>
+    .article-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-color-light);
+        font-weight: 500;
+        margin-bottom: 2rem;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+        color: var(--accent-color);
+    }
+
+    .news-article {
+        background-color: var(--bg-color-alt);
+        padding: 3rem;
+        border-radius: 12px;
+        box-shadow:
+            0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border: 1px solid var(--border-color);
+    }
+
+    .article-header {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .article-title {
+        font-size: 2.5rem;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .date {
+        color: var(--text-color-light);
+        font-weight: 500;
+    }
+
+    .tags-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        background-color: var(--bg-color);
+        color: var(--accent-color);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        border: 1px solid var(--border-color);
+    }
+
+    .article-content :global(img) {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 2.5rem 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-color);
+    }
+
+    .article-content {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--text-color);
+    }
+
+    /* Global styles targeting the markdown content injected by <Content /> */
+    .article-content :global(h2) {
+        font-size: 1.75rem;
+        color: var(--text-color);
+        margin: 2.5rem 0 1rem;
+    }
+
+    .article-content :global(h3) {
+        font-size: 1.5rem;
+        color: var(--text-color);
+        margin: 2rem 0 1rem;
+    }
+
+    .article-content :global(p) {
+        margin-bottom: 1.5rem;
+    }
+
+    .article-content :global(ul),
+    .article-content :global(ol) {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .article-content :global(li) {
+        margin-bottom: 0.5rem;
+    }
+
+    .article-content :global(a) {
+        color: var(--accent-color);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .article-content :global(a:hover) {
+        color: var(--accent-hover);
+    }
+
+    .article-content :global(blockquote) {
+        border-left: 4px solid var(--accent-color);
+        padding-left: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+        font-style: italic;
+        color: var(--text-color-light);
+    }
+
+    .article-content :global(strong) {
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    @media (max-width: 768px) {
+        .news-article {
+            padding: 1.5rem;
+        }
+
+        .article-title {
+            font-size: 2rem;
+        }
+    }
+</style>

@@ -1,0 +1,249 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+const locale = Astro.currentLocale || "en";
+
+const consortium = await getCollection("consortium", ({ id }) => {
+    return id.startsWith(`${locale}/`);
+});
+
+// Sort consortium members by order, defaulting to a high number if no order is provided
+const sortedConsortium = consortium.sort((a, b) => {
+    const orderA = a.data.order ?? 999;
+    const orderB = b.data.order ?? 999;
+    return orderA - orderB;
+});
+---
+
+<Layout
+    title="Consortium"
+    description="Meet the consortium members of the DICE Project."
+>
+    <div class="consortium-container">
+        <header class="page-header" aria-labelledby="consortium-title">
+            <h1 id="consortium-title">The DICE Consortium</h1>
+            <p>
+                The Digital Inclusion through Cybersecurity and Ethical AI
+                (DICE) project is driven by a collaborative consortium of
+                organizations from across Europe. Meet our dedicated team.
+            </p>
+        </header>
+
+        <div class="consortium-list">
+            {
+                sortedConsortium.map(async (member) => {
+                    const { Content } = await render(member);
+                    return (
+                        <article class="consortium-card">
+                            <div class="consortium-header">
+                                {member.data.logo && (
+                                    <div class="consortium-logo">
+                                        <img
+                                            src={member.data.logo}
+                                            alt={`${member.data.name} logo`}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                )}
+                                <div class="consortium-info">
+                                    <h2>{member.data.name}</h2>
+                                    <div class="consortium-meta">
+                                        <span class="role">
+                                            {member.data.role}
+                                        </span>
+                                        <span
+                                            class="separator"
+                                            aria-hidden="true"
+                                        >
+                                            &bull;
+                                        </span>
+                                        <span class="country">
+                                            {member.data.country}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="consortium-content">
+                                <Content />
+                            </div>
+
+                            <div class="consortium-footer">
+                                <a
+                                    href={member.data.website}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="website-link"
+                                >
+                                    Visit Website
+                                    <span class="sr-only">
+                                        for {member.data.name} (opens in a new
+                                        tab)
+                                    </span>
+                                </a>
+                            </div>
+                        </article>
+                    );
+                })
+            }
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .consortium-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+    }
+
+    .page-header p {
+        font-size: 1.25rem;
+        color: var(--text-color-light);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .consortium-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .consortium-card {
+        background-color: var(--bg-color-alt);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2.5rem;
+        box-shadow:
+            0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .consortium-header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .consortium-logo {
+        flex-shrink: 0;
+        width: 140px;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 1rem;
+        border: 1px solid var(--border-color);
+    }
+
+    .consortium-logo img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .consortium-info h2 {
+        font-size: 1.75rem;
+        color: var(--accent-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .consortium-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 500;
+        color: var(--text-color-light);
+        flex-wrap: wrap;
+    }
+
+    .role {
+        color: var(--text-color);
+        font-weight: 600;
+    }
+
+    .separator {
+        color: var(--border-color);
+    }
+
+    .consortium-content {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--text-color);
+        margin-bottom: 2.5rem;
+    }
+
+    .consortium-content :global(p:last-child) {
+        margin-bottom: 0;
+    }
+
+    .consortium-footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .website-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        background-color: transparent;
+        color: var(--accent-color);
+        border: 2px solid var(--accent-color);
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .website-link:hover,
+    .website-link:focus-visible {
+        background-color: var(--accent-color);
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .consortium-card {
+            padding: 1.5rem;
+        }
+
+        .consortium-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .consortium-logo {
+            width: 120px;
+            height: 120px;
+        }
+
+        .consortium-footer {
+            justify-content: stretch;
+        }
+
+        .website-link {
+            width: 100%;
+        }
+    }
+</style>

@@ -1,0 +1,282 @@
+---
+// src/components/Header.astro
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentPath = Astro.url.pathname;
+const locale = (Astro.currentLocale || "en") as "en" | "de" | "it" | "bg";
+
+// Helper to remove locale prefix from path to correctly switch languages
+const getPathWithoutLocale = (path: string) => {
+    const parts = path.split("/").filter(Boolean);
+    if (["de", "it", "bg"].includes(parts[0])) {
+        return "/" + parts.slice(1).join("/");
+    }
+    return path;
+};
+
+const currentBaseUrl = getPathWithoutLocale(currentPath);
+
+const locales = [
+    { id: "en", label: "EN" },
+    { id: "de", label: "DE" },
+    { id: "it", label: "IT" },
+    { id: "bg", label: "BG" },
+];
+
+const translations = {
+    en: {
+        about: "About",
+        consortium: "Consortium",
+        news: "News",
+        elearning: "E-Learning",
+        skipToContent: "Skip to main content",
+        selectLanguage: "Select Language",
+        homeAria: "DICE Project Home",
+    },
+    de: {
+        about: "Über uns",
+        consortium: "Konsortium",
+        news: "Neuigkeiten",
+        elearning: "E-Learning",
+        skipToContent: "Zum Hauptinhalt springen",
+        selectLanguage: "Sprache auswählen",
+        homeAria: "DICE Projekt Startseite",
+    },
+    it: {
+        about: "Chi siamo",
+        consortium: "Consorzio",
+        news: "News",
+        elearning: "E-Learning",
+        skipToContent: "Vai al contenuto principale",
+        selectLanguage: "Seleziona lingua",
+        homeAria: "DICE Progetto Home",
+    },
+    bg: {
+        about: "За проекта",
+        consortium: "Консорциум",
+        news: "Новини",
+        elearning: "Е-обучение",
+        skipToContent: "Премини към основното съдържание",
+        selectLanguage: "Избор на език",
+        homeAria: "DICE Проект Начало",
+    },
+};
+
+const t = translations[locale] || translations.en;
+---
+
+<header class="site-header">
+    <a href="#main-content" class="skip-link">{t.skipToContent}</a>
+    <div class="header-container">
+        <div class="logo">
+            <a href={getRelativeLocaleUrl(locale, "/")} aria-label={t.homeAria}>
+                <strong>DICE</strong> Project
+            </a>
+        </div>
+
+        <nav aria-label="Primary Navigation" class="main-nav">
+            <ul>
+                <li>
+                    <a
+                        href={getRelativeLocaleUrl(locale, "/")}
+                        aria-current={currentPath ===
+                        getRelativeLocaleUrl(locale, "/")
+                            ? "page"
+                            : undefined}>{t.about}</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href={getRelativeLocaleUrl(locale, "/consortium")}
+                        aria-current={currentPath.includes("/consortium")
+                            ? "page"
+                            : undefined}>{t.consortium}</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href={getRelativeLocaleUrl(locale, "/news")}
+                        aria-current={currentPath.includes("/news")
+                            ? "page"
+                            : undefined}>{t.news}</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href={getRelativeLocaleUrl(locale, "/e-learning")}
+                        aria-current={currentPath.includes("/e-learning")
+                            ? "page"
+                            : undefined}
+                        class="cta-link">{t.elearning}</a
+                    >
+                </li>
+            </ul>
+        </nav>
+
+        <div class="lang-switcher">
+            <label for="language-select" class="sr-only"
+                >{t.selectLanguage}</label
+            >
+            <select
+                id="language-select"
+                onchange="window.location.href = this.value;"
+            >
+                {
+                    locales.map((l) => (
+                        <option
+                            value={getRelativeLocaleUrl(l.id, currentBaseUrl)}
+                            selected={l.id === locale}
+                        >
+                            {l.label}
+                        </option>
+                    ))
+                }
+            </select>
+        </div>
+    </div>
+</header>
+
+<style>
+    .site-header {
+        background-color: var(--bg-color, rgba(255, 255, 255, 0.8));
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--accent-color, #2563eb);
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        z-index: 101;
+        text-decoration: none;
+        font-weight: bold;
+        transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+        top: 0;
+        outline: 2px solid #000;
+    }
+
+    .logo a {
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: var(--text-color, #1a202c);
+    }
+
+    .logo strong {
+        color: var(--accent-color, #2563eb);
+    }
+
+    .main-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .main-nav a {
+        text-decoration: none;
+        color: var(--text-color, #1a202c);
+        font-weight: 500;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition:
+            background-color 0.2s,
+            color 0.2s;
+    }
+
+    .main-nav a:hover {
+        color: var(--accent-color, #2563eb);
+    }
+
+    .main-nav a[aria-current="page"] {
+        color: var(--accent-color, #2563eb);
+        border-bottom: 2px solid var(--accent-color, #2563eb);
+    }
+
+    .main-nav a:focus-visible {
+        outline: 2px solid var(--accent-color, #2563eb);
+        outline-offset: 2px;
+    }
+
+    .cta-link {
+        background-color: var(--accent-color, #2563eb);
+        color: #ffffff !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 6px !important;
+        font-weight: 700;
+    }
+
+    .cta-link:hover {
+        background-color: var(--accent-hover, #1d4ed8) !important;
+    }
+
+    .lang-switcher select {
+        padding: 0.5rem;
+        border: 1px solid var(--border-color, #e2e8f0);
+        border-radius: 4px;
+        background-color: transparent;
+        color: var(--text-color, #1a202c);
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .lang-switcher select:focus-visible {
+        outline: 2px solid var(--accent-color, #2563eb);
+        outline-offset: 2px;
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .main-nav ul {
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .lang-switcher {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+    }
+</style>
